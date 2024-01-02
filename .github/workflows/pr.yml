@@ -26,8 +26,13 @@ env:
   GH_REF: "${{ github.ref }}"
   GH_SHA: ${{ github.sha }}
 
+permissions:
+  contents: read
+
 jobs:
   lint-fmt:
+    permissions:
+      contents: write  # for Git to git push
     name: Lint & fmt
     runs-on: ubuntu-latest
     steps:
