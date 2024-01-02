@@ -61,8 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: 🛒 Checkout
-        uses: actions/checkout@v3.3.0
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
         with:
           ref: ${{ env.GIT_REF }}
           fetch-depth: 0
@@ -107,13 +107,14 @@ jobs:
 
       - name: 📚 Wrangler publish
         # github.com/cloudflare/wrangler-action
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v3.3.2
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
           # input overrides env-defaults, regardless
           environment: ${{ env.WORKERS_ENV }}
         env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.NEXTDNS_CONF }}
           GIT_COMMIT_ID: ${{ env.COMMIT_SHA }}
 
       - name: 🎤 Notice
