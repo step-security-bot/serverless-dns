@@ -68,7 +68,7 @@ jobs:
       # docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs-or-python
       - name: 🐎 Setup Node @v19
         if: env.JS_RUNTIME == 'node'
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: ${{ env.NODE_VER }}
 
