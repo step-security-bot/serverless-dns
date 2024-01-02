@@ -45,6 +45,9 @@ env:
   MODE: 'p1'
   QDOH: 'q'
 
+permissions:
+  contents: read
+
 jobs:
   profiler1:
     name: 🕒 Fetch profiler

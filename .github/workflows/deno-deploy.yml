@@ -53,6 +53,9 @@ env:
   IN_FILE: 'src/server-deno.ts'
   OUT_FILE: 'rethinkdns.js'
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: 🌯 Deno Deploy
