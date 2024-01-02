@@ -54,8 +54,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: 🍌 Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           ref: ${{ env.GIT_REF }}
           fetch-depth: 0
@@ -71,7 +76,7 @@ jobs:
       # docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs-or-python
       - name: 🐎 Setup Node @v19
         if: env.JS_RUNTIME == 'node'
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4.0.1
         with:
           node-version: ${{ env.NODE_VER }}
 
@@ -85,7 +90,7 @@ jobs:
       # deno.com/blog/deploy-static-files#example-a-statically-generated-site
       - name: 🦕 Setup Deno @1.29.3
         if: env.JS_RUNTIME == 'deno'
-        uses: denoland/setup-deno@main
+        uses: denoland/setup-deno@0df5d9c641efdff149993c321fc27c11c5df8623 # main
         with:
           deno-version: ${{ env.DENO_VER }}
 

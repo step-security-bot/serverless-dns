@@ -66,8 +66,13 @@ jobs:
       # needed to clone repo
       contents: read
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: 🚚 Fetch code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           ref: ${{ github.event.inputs.git-ref || github.ref }}
           fetch-depth: 0
@@ -89,7 +94,7 @@ jobs:
           git merge origin/${BUILD_BRANCH} || :
 
       - name: 🦕 Install Deno @1.29
-        uses: denoland/setup-deno@main
+        uses: denoland/setup-deno@0df5d9c641efdff149993c321fc27c11c5df8623 # main
         with:
           deno-version: 1.29.3
 
@@ -106,7 +111,7 @@ jobs:
       - name: 🤸🏼 Deploy to deno.com
         id: dd
         if: ${{ env.DEPLOY_MODE == 'action' }}
-        uses: denoland/deployctl@1.9.0
+        uses: denoland/deployctl@48c9c6732097c0832ef1f2de008b6db01241c84b # 1.9.0
         with:
           project: ${{ env.PROJECT_NAME }}
           entrypoint: ${{ env.OUT_FILE }}
